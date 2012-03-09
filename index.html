@@ -1,0 +1,151 @@
+<!doctype html>  
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		
+		<title>Frontend Playground</title>
+
+		<meta name="description" content="An easy to use CSS 3D slideshow tool for quickly creating good looking HTML presentations.">
+		<meta name="author" content="Hakim El Hattab">
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		
+		<link rel="stylesheet" href="reveal.js/css/reset.css">
+		<link rel="stylesheet" href="reveal.js/css/main.css">
+
+		<link rel="stylesheet" href="reveal.js/lib/zenburn.css">
+
+		<link rel="stylesheet" type="text/css" href="css/playground.css">
+
+		<script src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
+	</head>
+	
+	<body>
+		
+		<div id="reveal">
+			
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Playground</h1>
+					<h3 class="inverted">My JS, CSS and HTML5 Playground</h3>
+					<script>
+						// Delicously hacky. Look away.
+						if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) )
+						document.write( '<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>' );
+					</script>
+				</section>
+				
+				<section>
+					<h2>form</h2>
+					<p class="formLayout">
+						<label for="title_small">Title small</label>
+						<input type="text" id="title_small" class="master" placeholder="Type here"></input>
+						<br>
+						<label for="title_medium">Title medium</label>
+						<input type="text" id="title_medium" class="slave"></input>
+						<input type="button" id="reset_medium" value="reset"></input>
+						<br>
+						<label for="title_long">Title long</label>
+						<input type="text" id="title_long" class="slave"></input>
+						<input type="button" id="reset_long" value="reset"></input>
+						<br>
+						<input type="button" value="save">
+					</p>
+					<script>
+						YUI().use('node', function (Y) {
+							var titleSmall = Y.one('#title_small');
+
+							Y.all('.formLayout input').on('keyup', function(e){
+								if(e.target.hasClass('slave')){
+									e.target.removeClass('slave');
+								}
+							});
+
+							function reset(button, input){
+								Y.one(button).on('click', function(e){
+									var inputNode = Y.one(input);
+									inputNode.set('value','');
+									inputNode.set('placeholder',titleSmall.get('value'));
+								});
+							}
+							reset('#reset_medium','#title_medium');
+							reset('#reset_long','#title_long');
+							
+
+							Y.one('.master').on('keyup', function(e){
+								Y.all('.slave').set('placeholder',e.target.get('value'));
+							});
+							/*
+							titleSmall.on('keyup', function(e){
+								Y.all('input.slave').set('value', e.target.get('value'));
+							})
+
+							Y.all('input[name="edit"]').on('click', function(e){
+								var value = e.target.get('value');
+								var textInput = Y.one('#'+value)
+								if(textInput.hasAttribute('disabled')){
+									textInput.removeAttribute('disabled');
+								} else{
+									textInput.setAttribute('disabled');
+									textInput.set('value',titleSmall.get('value'));
+								}
+							});*/
+						});
+					</script>
+
+				</section>
+			</div>
+
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+			</aside>
+
+			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+			<div class="progress"><span></span></div>
+			
+		</div>
+		
+		<script src="reveal.js/js/reveal.js"></script>
+		<script src="reveal.js/lib/highlight.js"></script>
+
+		<script>
+			// Parse the query string into a key/value object
+			var query = {};
+			location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
+				query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
+			} );
+
+			Reveal.initialize({
+				// Display controls in the bottom right corner
+				controls: true,
+
+				// Display a presentation progress bar
+				progress: true,
+
+				// If true; each slide will be pushed to the browser history
+				history: true,
+
+				// Flags if mouse wheel navigation should be enabled
+				mouseWheel: true,
+
+				// Apply a 3D roll to links on hover
+				rollingLinks: true,
+
+				// UI style
+				theme: query.theme || 'default', // default/neon
+
+				// Transition style
+				transition: query.transition || 'default' // default/cube/page/concave/linear(2d)
+			});
+
+			hljs.initHighlightingOnLoad();
+		</script>
+
+	</body>
+</html>

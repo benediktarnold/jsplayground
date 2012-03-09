@@ -1,0 +1,39 @@
+.formLayout
+    {
+        background-color: gray;
+        //border: solid 1px #a1a1a1;
+        padding: 10px;
+        width: 630px;
+        height: 150px;
+        text-align:center;
+    }
+    
+    .formLayout label, .formLayout input
+    {
+        display: block;
+        width: 200px;
+        height: 30px;
+        float: left;
+        margin-bottom: 10px;
+    }
+ 
+    .formLayout label
+    {
+        text-align: right;
+        vertical-align: middle;
+        margin-right: 20px;
+        font-size: 0.5em;
+    }
+
+    .formLayout input[type="text"]{
+        border: solid 1px black;
+    }
+
+    input.slave{
+        color: gray;
+    }
+ 
+    br
+    {
+       // clear: left;
+    }
