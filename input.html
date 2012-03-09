@@ -31,10 +31,14 @@
 					var result = {};
 					Y.all('input[type="text"]').each(function(node,b,c){
 						var field = {};
-						field.value = node.get('value');
-						field.userdefined = node.get('value') != node.get('placeholder');
-						console.log(node.get('value'));
-
+						if(node.get('value') != ""){
+							field.value = node.get('value');
+							field.userdefined = true;
+						} else {
+							field.value = node.get('placeholder');
+							field.userdefined = false;
+						}
+						
 						result[node.get('id')] = field;
 					});
 					console.log(result);
