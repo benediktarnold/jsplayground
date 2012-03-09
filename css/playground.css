@@ -1,9 +1,12 @@
+
+label{
+    font-size: 12pt;
+}
 .formLayout
     {
         background-color: gray;
-        //border: solid 1px #a1a1a1;
         padding: 10px;
-        width: 630px;
+        width: 430px;
         height: 150px;
         text-align:center;
     }
@@ -22,18 +25,10 @@
         text-align: right;
         vertical-align: middle;
         margin-right: 20px;
-        font-size: 0.5em;
+        //font-size: 0.5em;
     }
 
     .formLayout input[type="text"]{
         border: solid 1px black;
     }
-
-    input.slave{
-        color: gray;
-    }
  
-    br
-    {
-       // clear: left;
-    }

@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+	<title></title>
+
+	<link rel="stylesheet" type="text/css" href="css/playground.css">
+
+	<script src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
+</head>
+<body>
+	<h2>form</h2>
+	<p class="formLayout">
+		<label for="title_small">Title small</label>
+		<input type="text" id="title_small" class="master" placeholder="Type here"></input>
+		<br>
+		<label for="title_medium">Title medium</label>
+		<input type="text" id="title_medium" class="slave"></input>
+		<br>
+		<label for="title_long">Title long</label>
+		<input type="text" id="title_long" class="slave"></input>
+		<br>
+		<input type="button" value="save">
+	</p>
+		<script>
+			YUI().use('node', function (Y) {
+				Y.one('.master').after('keyup', function(e){
+					Y.all('.slave').set('placeholder',e.target.get('value'));
+				});
+
+				Y.one('input[value="save"]').on('click', function(e){
+					var result = {};
+					Y.all('input[type="text"]').each(function(node,b,c){
+						var field = {};
+						field.value = node.get('value');
+						field.userdefined = node.get('value') != node.get('placeholder');
+						console.log(node.get('value'));
+
+						result[node.get('id')] = field;
+					});
+					console.log(result);
+				})
+			});
+		</script>
+</body>
+</html>
